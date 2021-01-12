@@ -4,6 +4,7 @@
 CXX      = g++
 CC       = gcc
 
+# Set the executable name
 PROG_NAME := exec_name # name of the executable
 
 SRC_DIRS = .
@@ -13,15 +14,16 @@ SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -type f -regex ".*\.cpp" -o -regex 
 _OBJS := $(addsuffix .o,$(basename $(SRCS)))
 OBJS := $(patsubst ./%,$(OBJDIR)/%,$(_OBJS))
 
-# Libraries: -L and -l have to be in order for ubuntu
-LDFLAGS += -L/usr/local/lib -lpcap
-LDFLAGS += -L/usr/local/lib -lpthread
-LDFLAGS += -lzmqpp -lzmq
+# Add Libraries (-L and -l have to be in order for ubuntu)
+# Example: LDFLAGS += -L/usr/local/lib -lpthread
 
+# Compiler flags
 CXXFLAGS 	+= -Wall -std=c++11
 CCFLAGS 	+= -Wall -Wextra
 CCFLAGS 	+= -std=gnu99 # Disable if not needed
 CCFLAGS 	+= -O3
+
+# Commands
 
 .PHONY: clean
 
